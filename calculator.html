@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="calculatos.css">
+    
+</head >
+<body >
+    <div class="all">
+    <div class="output"><div class="result"></div>
+    </div>
+    <div class="firstRow">
+        <button class="Numeros" onclick="numbers('1');">
+            1
+        </button>
+        <button class="Numeros" onclick="numbers('2')">
+            2
+        </button>
+        <button class="Numeros" onclick="numbers('3');">
+            3
+        </button>
+        <button class="Numeros" onclick="pluses('+');">
+            +
+        </button>
+    </div>
+    
+    <div class="secondRow">
+        <button class="Numeros" onclick="numbers('4')">
+            4
+        </button>
+        <button class="Numeros"onclick="numbers('5');">
+            5
+        </button>
+        <button class="Numeros" onclick="numbers('6');">
+            6
+        </button>
+        <button class="Numeros" onclick="pluses('-');">
+            -
+        </button>
+    </div>
+    
+    <div class="thirdRow">
+        <button class="Numeros" onclick="numbers('7')">
+            7
+        </button>
+        <button class="Numeros" onclick="numbers('8')">
+            8
+        </button>
+        <button class="Numeros" onclick="numbers('9')">
+            9
+        </button>
+        <button class="Numeros" onclick="pluses('*')">
+            *
+        </button>
+    </div>
+    <div class="thirdRow">
+        <button class="Numeros" onclick="equal();">
+            =
+        </button>
+        <button class="Numeros" onclick="numbers('0');">
+            0
+        </button>
+        <button class="Numeros" onclick="numbers('.');">
+            .
+        </button>
+        <button class="Numeros" onclick="pluses('/');">
+            /
+        </button>
+    </div>
+    <div class="thirdRow">
+        <button class="Numeros" onclick="numbers(' ');">
+            Clear
+        </button>
+    </div>
+    
+</div>
+
+
+    <script>
+        let myNumber;
+        let thirdM;
+        let thirdNr;
+        let Results;
+        function numbers(Number){
+            thirdM=localStorage.getItem('thirdNr');
+        thirdM=NaN;
+        localStorage.setItem('thirdNr',thirdM);
+            let storedSum = localStorage.getItem('sum');
+            let firtsNumber;
+            
+            if(storedSum ===''){
+                storedSum=null;
+            }
+    
+    if (storedSum === null) {
+        storedSum = Number;
+    } else {
+        if(storedSum==='0'){
+            storedSum=Number;
+        }else{
+        storedSum =String(storedSum) +String(Number);
+        }
+    }
+    if(Number===' '){
+        storedSum='';
+        
+    }
+
+    
+            localStorage.setItem('sum', storedSum);
+            document.querySelector('.result').innerHTML=storedSum;
+    }
+
+    function pluses(sign){
+        let thirdNum = localStorage.getItem('thirdNr');
+    let after = localStorage.getItem('sum');
+
+    
+    if (!isNaN(thirdNum)) {
+        after = thirdNum;
+    }
+
+    firstNumber = after;
+    localStorage.setItem('firstnumber', firstNumber);
+    after = '';
+    localStorage.setItem('sum', after);
+    document.querySelector('.result').innerHTML = firstNumber + sign;
+    localStorage.setItem('sign', sign);
+        
+    }
+
+        function equal(){
+            let FinalSign= localStorage.getItem('sign');
+            console.log(FinalSign);
+            let finalFir;
+            let finalSec;
+            switch(FinalSign){
+                case '+':
+                finalFir=Number(localStorage.getItem('firstnumber'));
+                finalSec=Number(localStorage.getItem('sum'));
+                Results = finalFir+finalSec;
+                thirdNr=String(Results);
+                localStorage.setItem('thirdNr',thirdNr);
+
+                document.querySelector('.result').innerHTML=Results;
+                finalFir='';
+                localStorage.setItem('firstnumber',finalFir);
+                storedSum='';
+                localStorage.setItem('sum',storedSum);
+                sign=undefined;
+                localStorage.setItem('sign',sign);
+                    break;
+                case '-':
+                finalFir=Number(localStorage.getItem('firstnumber'));
+                finalSec=Number(localStorage.getItem('sum'));
+                Results = finalFir-finalSec;
+                thirdNr=String(Results);
+                localStorage.setItem('thirdNr',thirdNr);
+                console.log(Results);
+                document.querySelector('.result').innerHTML=Results;
+                finalFir='';
+                localStorage.setItem('firstnumber',finalFir);
+                storedSum='';
+                localStorage.setItem('sum',storedSum);
+                    break;
+                case '*':
+                    finalFir=Number(localStorage.getItem('firstnumber'));
+                    finalSec=Number(localStorage.getItem('sum'));
+                    Results = finalFir*finalSec;
+                    thirdNr=String(Results);
+                localStorage.setItem('thirdNr',thirdNr);
+                    console.log(Results);
+                    document.querySelector('.result').innerHTML=Results;
+                    finalFir='';
+                    localStorage.setItem('firstnumber',finalFir);
+                    storedSum='';
+                    localStorage.setItem('sum',storedSum);
+                break;
+                case '/':
+                finalFir=Number(localStorage.getItem('firstnumber'));
+                finalSec=Number(localStorage.getItem('sum'));
+                Results = finalFir/finalSec;
+                thirdNr=String(Results);
+                localStorage.setItem('thirdNr',thirdNr);
+                
+                console.log(Results);
+                document.querySelector('.result').innerHTML=Results;
+                finalFir='';
+                localStorage.setItem('firstnumber',finalFir);
+                storedSum='';
+                localStorage.setItem('sum',storedSum);
+                    break;
+                default:
+                    alert('Error');
+                    break;
+            }
+        }
+
+    </script>
+</body>
+</html>
