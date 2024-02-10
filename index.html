@@ -116,10 +116,13 @@
     function pluses(sign){
         let thirdNum = localStorage.getItem('thirdNr');
     let after = localStorage.getItem('sum');
+        let afterchange = localStorage.getItem('firstnumber');
 
     
     if (!isNaN(thirdNum)) {
         after = thirdNum;
+    }if(after ===''){
+        after =afterchange;
     }
 
     firstNumber = after;
